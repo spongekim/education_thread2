@@ -25,12 +25,12 @@ public:
 	std::string get_str(void) {	return str;}
 
 	void process(void) {
-		std::sort(str.begin(), str.end());
 		{
-			processed[idx] = str;
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 			{
 				std::unique_lock<std::mutex> lock(bar_mutex);
+				std::sort(str.begin(), str.end());
+				processed[idx] = str;
 				bar->update();
 			}
 		}
